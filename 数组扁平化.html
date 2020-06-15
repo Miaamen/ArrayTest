@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组扁平化的几个姿势</title>
+</head>
+<body>
+    <script>
+        const arr = [1, [[2, 3], 4]];
+
+        /* 1. 使用扩展运算符和concat()*/
+        function flattenWithConcat (array) {
+            // 先用some()检测数组中的元素是否为一个数组
+            while(array.some(item => {
+                return Object.prototype.toString.call(item) === '[object Array]'
+            })){
+                array = [].concat(...array);
+            }
+            return array;
+        }
+        console.log(`使用扩展运算符和concat()的结果：${flattenWithConcat(arr)}`)
+
+        /* 2. 使用递归*/
+        function flattenWithRecursion (array) {
+            let res = [];
+            array.forEach((item, index, array) => {
+                if (Object.prototype.toString.call(item) === '[object Array]'){
+                    res = res.concat(flattenWithRecursion(item));
+                } else {
+                    res.push(array[index])
+                }
+            })
+            return res;
+        }
+        console.log(`使用递归的结果：${flattenWithRecursion(arr)}`)
+
+        /* 3. 使用toString*/
+        function flattenWithToString (array) {
+            return array.toString().split(',').map(item => +item);
+        }
+        console.log(`使用toString的结果：${flattenWithToString(arr)}`)
+    </script>
+</body>
+</html>
