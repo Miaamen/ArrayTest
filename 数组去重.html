@@ -46,8 +46,8 @@
         }
         console.log(`使用Array.filter + indexOf去重的结果：${uniqueWithFilterAndIndexOf(arr)}`)
 
-        /* 4. set + 解构赋值 */
-        /* 使用set去重，再用解构赋值构成数组*/
+        /* 4. set + 扩展运算符 */
+        /* 使用set去重，再用扩展运算符构成数组*/
         function uniqueWithSet (arr) {
             return [...new Set(arr)]
         }
